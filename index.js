@@ -54,8 +54,8 @@ app.get("/swru", async (req,res)=>{
 		let site = query.site;
 		let userid = query.userid;
 		let request = await axios.get(site);
-
-			axios.get(`https://api.thingspeak.com/update?api_key=${apikey}&field1=${encodeURIComponent(`${"swru"+userid}\\${encodeURIComponent(`${request.status}\\${request.headers["content-type"].break(";")[0]}\\${request.headers["content-type"].includes("application")?JSON.stringify(request.data):request.data}`)}`)}`);
+			ctype = request.headers["content-type"]
+			axios.get(`https://api.thingspeak.com/update?api_key=${apikey}&field1=${encodeURIComponent(`${"swru"+userid}\\${encodeURIComponent(`${request.status}\\${ctype.break(";")[0]}\\${request.headers["content-type"].includes("application")?JSON.stringify(request.data):request.data}`)}`)}`);
 			res.sendFile("1x1.gif",root);
 
 	} else {
