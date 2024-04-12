@@ -55,7 +55,7 @@ app.get("/swru", async (req,res)=>{
 		let userid = query.userid;
 		let request = await axios.get(site);
 
-			axios.get(`https://api.thingspeak.com/update?api_key=${apikey}&field1=${"swru"+userid}-${encodeURIComponent(request)}`);
+			axios.get(`https://api.thingspeak.com/update?api_key=${apikey}&field1=${"swru"+userid}-${encodeURIComponent(JSON.stringify(request))}`);
 			res.sendFile("1x1.gif",root);
 
 	} else {
