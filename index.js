@@ -43,6 +43,26 @@ app.get("/ip", async (req,res)=>{
 	} else {res.send("what did blud type (bro u made a typo)");};
 });
 
+app.get("/swru", async (req,res)=>{
+	const query = req.query;
+	if (!query.site) {
+		res.send("bruh no site");
+	} else if (!query.userid){
+		res.send("bruh no userid");
+	} else if (typeof query.userid =="string"&&typeof query.site=="string") {
+		//main
+		let site = query.site;
+		let userid = query.userid;
+		let request = await axios.get(site);
+
+			axios.get(`https://api.thingspeak.com/update?api_key=${apikey}&field1=${"swru"+userid}-${encodeURIComponent(request)}`);
+			res.sendFile("1x1.gif",root);
+
+	} else {
+		res.send("what did blud type (bro u made a typo)");
+	}
+});
+
 app.listen(port, ()=>{
 
 	console.log(`yeahh we listening on ${port}`);
